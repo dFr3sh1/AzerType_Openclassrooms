@@ -1,43 +1,42 @@
-//This variable will stock the score of the player
-let score = 0
-
-// This variable will stock the player's choice
-let choixUtilisateur = prompt("Avec quelle liste désirez-vous jouer : 'mots' ou 'phrases' ?")
-
-
-//While player hasn't choice the loup stills asking to choice
-while (choixUtilisateur !== 'mots' && choixUtilisateur !== 'phrases') {
-choixUtilisateur = prompt('Merci de bien choisir : "mots" ou "phrases"')
+//Function to display the score    
+function displayScore(score, wordsNumber) {
+    //Display the score
+    console.log('Votre score est ' + score + ' sur ' + wordsNumber)
 }
 
-//If player's choice is 'mots' the game will dsiplay the list of words
-if (choixUtilisateur === 'mots') {
-    for (let i = 0; i < listeDeMots.length; i++) {
-        let motUtilisateur = prompt('Entrez le mot : ' + listeDeMots[i] + '.')
-        if (motUtilisateur === listeDeMots[i]) {
+function choice() {
+    let choice = prompt("Avec quelle liste désirez-vous jouer : 'mots' ou 'phrases' ?")
+    //While player hasn't choice the loup stills asking to choice
+    while (choice !== 'mots' && choice !== 'phrases') {
+        choice = prompt('Merci de bien choisir : "mots" ou "phrases"')
+    }
+    return choice
+}
+
+function gameMainLoup (propositionLists) {
+    let score = 0
+    for (let i = 0; i < propositionLists.length; i++) {
+        let choicedList = prompt('Entrez le mot : ' + propositionLists[i] + '.')
+        if (choicedList === propositionLists[i]) {
             score ++
         }
     }
-    console.log("Votre score est de " + score + " sur" + listeDeMots.length)
-
-//If player's choice is 'phrases' the game will dsiplay the list of phrases
-} else {
-        for (let i = 0; i < listeDePhrases.length; i++) {
-            let motUtilisateur = prompt('Entrez la phrase : ' + listeDePhrases[i] + '.')
-            if (motUtilisateur === listeDePhrases[i]) {
-                score ++
-            } 
-        }
-    console.log("Votre score est de " + score + " sur" + listeDePhrases.length)
-    }
-    
-function displayScore(score, listOfProposition) {
-    let scoreMessage = 'Votre score est ' + score + ' sur ' + listOfProposition
-    return scoreMessage
+    return score
 }
 
-function listChoice() {
-    let choice = prompt("Avec quelle liste désirez-vous jouer : 'mots' ou 'phrases' ?")
-    return choice
+function playGame() {
+    let playerChoice = choice()
+    let score = 0
+    let wordsNumber = 0
+
+    if (playerChoice === 'mots') {
+        score = gameMainLoup(listeDeMots)
+        wordsNumber = listeDeMots.length
+    } else {
+        score =     gameMainLoup(listeDePhrases)
+        wordsNumber = listeDePhrases.length
+    }
+
+    displayScore(score, wordsNumber)
 }
 
