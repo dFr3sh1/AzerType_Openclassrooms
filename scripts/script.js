@@ -13,6 +13,7 @@ function choice() {
     return choice
 }
 
+//Function to execute the main loup of the game
 function gameMainLoup (propositionLists) {
     let score = 0
     for (let i = 0; i < propositionLists.length; i++) {
@@ -22,21 +23,5 @@ function gameMainLoup (propositionLists) {
         }
     }
     return score
-}
-
-function playGame() {
-    let playerChoice = choice()
-    let score = 0
-    let wordsNumber = 0
-
-    if (playerChoice === 'mots') {
-        score = gameMainLoup(listeDeMots)
-        wordsNumber = listeDeMots.length
-    } else {
-        score =     gameMainLoup(listeDePhrases)
-        wordsNumber = listeDePhrases.length
-    }
-
-    displayScore(score, wordsNumber)
 }
 
