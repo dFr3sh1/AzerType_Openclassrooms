@@ -4,7 +4,7 @@ function displayScore(score, wordsNumber) {
     console.log('Votre score est ' + score + ' sur ' + wordsNumber)
 }
 
-function choice() {
+//function choice() {
     let choice = prompt("Avec quelle liste désirez-vous jouer : 'mots' ou 'phrases' ?")
     //While player hasn't choice the loup stills asking to choice
     while (choice !== 'mots' && choice !== 'phrases') {
@@ -23,17 +23,6 @@ function gameMainLoup (propositionLists) {
         }
     }
     return score
-}
-
-let baliseZoneProposition = document.querySelector("#zoneProposition span");
-
-console.log(baliseZoneProposition);
-
-let radioInputList = document.querySelectorAll(".zoneChoix input");
-console.log(radioInputList)
-
-for (let i = 0; i < radioInputList.length; i++) {
-    console.log(radioInputList[i]);
 }
 
 //Main function to launch the game
