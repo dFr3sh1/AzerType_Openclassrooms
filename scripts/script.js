@@ -25,10 +25,18 @@ function playGame() {
     let inputEcriture = document.getElementById('inputEcriture')
     let i = 0
 
+    displayProposition(listeDeMots[i])
     validationBtn.addEventListener('click', () => {
         console.log(inputEcriture.value)
         i++
-        displayProposition(listeDeMots[i])
+        inputEcriture.value = ''
+        if (listeDeMots[i] === undefined) {
+            displayProposition("Le jeu est fini")
+            validationBtn.disabled = true
+        } else {
+            displayProposition(listeDeMots[i])
+        }
+
     })
 
     displayScore(score, wordsNumber)
