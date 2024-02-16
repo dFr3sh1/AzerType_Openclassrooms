@@ -15,7 +15,7 @@ function displayScore(score, wordsNumber) {
 function displayProposition(proposition) {
     let zoneProposition = document.querySelector('.zoneProposition')
     zoneProposition.innerText = proposition
-}
+};
 
 //Main function to launch the game
 function playGame() {
@@ -23,15 +23,15 @@ function playGame() {
     let validationBtn = document.getElementById('validation-btn')
     let inputEcriture = document.getElementById('inputEcriture')
     let i = 0
+    let choicedList = listeDeMots
 
 //Displaies the table listeDeMots
-
-    displayProposition(listeDeMots[i])
+    displayProposition(choicedList[i])
     validationBtn.addEventListener('click', () => {
         console.log(inputEcriture.value)
 
         //If the value is the same than inputEcriture the score increases
-        if (inputEcriture.value === listeDeMots[i]) {
+        if (inputEcriture.value === choicedList[i]) {
             score++
         }
         i++
@@ -39,25 +39,40 @@ function playGame() {
         inputEcriture.value = ''
 
         //If the value of listeDeMots is undefined the gameis over
-        if (listeDeMots[i] === undefined) {
+        if (choicedList[i] === undefined) {
             displayProposition("Le jeu est fini")
             validationBtn.disabled = true
             
         } else {
             //To clean the fill of proposition
-            displayProposition(listeDeMots[i])
+            displayProposition(choicedList[i])
         }
 
     });
+
+//Create a new function to pick Motsor Phrases
+let choice = document.querySelectorAll('.optionSource input')
+for (let index = 0; index< choice.length; index++) {
+    choice[index].addEventListener("change", (event) => {
+        console.log(event.target.value)
+        if (event.target.value === "1") {
+            choicedList = listeDeMots
+        } else {
+            choicedList = listeDePhrases
+        }
+        displayProposition(choicedList[i])
+    })
+};
+
 //To validate the word pressing the Enter key
     inputEcriture.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
             validationBtn.click()
         }
-    })
+    });
 
     displayScore(score, i)
-}
+};
 
 
 
