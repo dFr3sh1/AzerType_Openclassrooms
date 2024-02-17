@@ -44,7 +44,7 @@ function playGame() {
             validationBtn.disabled = true
             
         } else {
-            //To clean the fill of proposition
+        //To update the list of proposition justa after validating
             displayProposition(choicedList[i])
         }
 
@@ -60,6 +60,7 @@ for (let index = 0; index< choice.length; index++) {
         } else {
             choicedList = listeDePhrases
         }
+        //To update the list of proposition justafterthe choice
         displayProposition(choicedList[i])
     })
 };
