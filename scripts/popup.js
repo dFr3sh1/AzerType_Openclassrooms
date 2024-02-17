@@ -1,38 +1,33 @@
-//Create functions for sahering the score throught the popup
-/**/
-/* Function to display popup window
-*/
+//Create functions to display the popupBackground
+
+
+
 function displayPopup() {
-    let popupBackground = document.querySelector(".popupBackground")
-    //popupBackground is display:none in css we must change the class by active
-    popupBackground.classList.add("active")
-
+    let popupBackground = document.querySelector('.popupBackground')
+    //Add the class active because it has display none as default value
+    popupBackground.classList.add('active')
 }
 
-/**/
-/*Function to hide the popup 
- */
 function hidePopup() {
-    let popupBackground = document.querySelector(".popupBackground")
-    //To change the visibility of the popup we delete the class active
-    popupBackground.classList.remove("active")
+    let popupBackground = document.querySelector('.popupBackground')
+    popupBackground.classList.remove('active')
 }
 
-/**/
-/*Functions to add event listener to the popup
- */
 function initAddEventListenerPopup() {
-    let shareBtn = document.querySelector(".zonePartage button")
+    // On écoute le click sur le bouton "partager"
+    let btnPartage = document.querySelector(".zonePartage button")
     let popupBackground = document.querySelector(".popupBackground")
-    shareBtn.addEventListener("click", () => {
-        //Display the popup with click
+    btnPartage.addEventListener("click", () => {
+        // Quand on a cliqué sur le bouton partagé, on affiche la popup
         displayPopup()
-    });
+    })
 
-    //To listen the click on the popupBackground element
+    // On écoute le click sur la div "popupBackground"
     popupBackground.addEventListener("click", (event) => {
-        //If user click only on the popupBackground
-        if (event.target == popupBackground) {
+        // Si on a cliqué précisément sur la popupBackground 
+        // (et pas un autre élément qui se trouve dedant)
+        if (event.target === popupBackground) {
+            // Alors on cache la popup
             hidePopup()
         }
     })

@@ -17,8 +17,14 @@ function displayProposition(proposition) {
     zoneProposition.innerText = proposition
 };
 
+function displayEmail(name, email, score) {
+    let mailto = `mailto:${email}?subject=Partage du score Azertype&body=Salut, je suis ${name} et je viens de réaliser le score ${score} sur le site d'Azertype !`
+    location.href = mailto
+}
+
 //Main function to launch the game
 function playGame() {
+    initAddEventListenerPopup()
     let score = 0
     let validationBtn = document.getElementById('validation-btn')
     let inputEcriture = document.getElementById('inputEcriture')
@@ -72,8 +78,25 @@ for (let index = 0; index< choice.length; index++) {
         }
     });
 
+    let form = document.querySelector("form")
+    form.addEventListener("submit", (event) => {
+        event.preventDefault()
+    
+    let tagName = document.getElementById("nom")
+    let name = tagName.value
+
+    let tagEmail = document.getElementById("email")
+    let email = tagEmail.value
+
+    let tagScore = `${score} / ${i}`
+
+    displayEmail(name, email, tagScore)
+
+    })
+
+
+
     displayScore(score, i)
 };
-
 
 
