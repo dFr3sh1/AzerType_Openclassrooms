@@ -54,8 +54,6 @@ function verifyEmail(email) {
     let emailRegExp = new RegExp("[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+")
     if (!emailRegExp.test(email)) {
         throw new Error("L'email n'est pas valide.")     
-    }
-    return true
 }
 function displayErrorMessage(message) {
     let spanErrorMessage = document.getElementById('errorMessage')
