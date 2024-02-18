@@ -37,41 +37,60 @@ function displayEmail(name, email, score) {
 /**
  * 
  * @param {string} name 
- * @returns {boolean}
+ * @throws {Error} 
  */
 function verifyName(name){
-    if (name.length >= 2) {
-        return true
+    if (name.length < 2) {
+        throw new Error("Le nom est trop court.")
     }
-    return false
 }
+
 /**
  * 
- * @param {email} email 
- * @returns {boolean}
+ * @param {string} email 
+ * @throws {Error}
  */
 function verifyEmail(email) {
     let emailRegExp = new RegExp("[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+")
-    if (emailRegExp.test(email)) {
-        return true
+    if (!emailRegExp.test(email)) {
+        throw new Error("L'email n'est pas valide.")     
     }
-    return false
+    return true
 }
+function displayErrorMessage(message) {
+    let spanErrorMessage = document.getElementById('errorMessage')
+
+    if (!spanErrorMessage) {
+        let popup = document.querySelector(".popup")
+        spanErrorMessage = document.createElement("span")
+        spanErrorMessage.id = "errorMessage"
+
+        popup.append(spanErrorMessage)
+    }
+    spanErrorMessage.innerText = message
+}
+
 /**
- * 
- * @param {number} tagScore 
+ * @param {number}
+ * This function manages the form 
  */
 function formManager(tagScore) {
-    let tagName = document.getElementById("nom")
-    let name = tagName.value
-    
-    let tagEmail = document.getElementById("email")
-    let email = tagEmail.value
-    
-    if (verifyName(name) && verifyEmail(email)) {
-        displayEmail(name, email, tagScore)
-    } else {
-        console.log("Erreur")
+    try {
+        let tagName = document.getElementById("nom");
+        let name = tagName.value;
+        verifyName(name);
+
+        let tagEmail = document.getElementById("email");
+        let email = tagEmail.value;
+        verifyEmail(email);
+
+        // Send a voidstring if values have been modified correctly
+        displayErrorMessage('');
+        displayEmail(name, email, tagScore);
+
+    } catch (error) {
+        //Manage errors independently
+        displayErrorMessage(error.message);
     }
 }
 
@@ -141,5 +160,4 @@ for (let index = 0; index< choice.length; index++) {
 
     displayScore(score, i)
 };
-
 
