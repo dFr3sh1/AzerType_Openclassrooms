@@ -22,6 +22,21 @@ function displayEmail(name, email, score) {
     location.href = mailto
 }
 
+function verifyName(name){
+    if (name.length >= 2) {
+        return true
+    }
+    return false
+}
+
+function verifyEmail(email) {
+    let emailRegExp = new RegExp("[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+")
+    if (emailRegExp.test(email)) {
+        return true
+    }
+    return false
+}
+
 //Main function to launch the game
 function playGame() {
     initAddEventListenerPopup()
@@ -78,23 +93,24 @@ for (let index = 0; index< choice.length; index++) {
         }
     });
 
+
     let form = document.querySelector("form")
     form.addEventListener("submit", (event) => {
         event.preventDefault()
-    
-    let tagName = document.getElementById("nom")
-    let name = tagName.value
-
-    let tagEmail = document.getElementById("email")
-    let email = tagEmail.value
-
-    let tagScore = `${score} / ${i}`
-
-    displayEmail(name, email, tagScore)
-
+        
+        let tagName = document.getElementById("nom")
+        let name = tagName.value
+        
+        let tagEmail = document.getElementById("email")
+        let email = tagEmail.value
+        
+        if (verifyName(name) && verifyEmail(email)) {
+            let tagScore = `${score} / ${i}`
+            displayEmail(name, email, tagScore)
+        } else {
+            console.log("Erreur")
+        }
     })
-
-
 
     displayScore(score, i)
 };
